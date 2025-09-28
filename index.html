@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Australian States Job Vacancies Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <h1>Australian States Job Vacancies Data</h1>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+        fetch('vega-spec.json')
+            .then(response => response.json())
+            .then(spec => {
+                vegaEmbed('#vis', spec);
+            });
+    </script>
+</body>
+</html>
