@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Employment Distribution Across Australian States",
+  "width": 650,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+    "format": {"type": "json", "property": "features"}
+  },
+  "transform": [{
+    "lookup": "properties.STATE_NAME",
+    "from": {
+      "data": {
+        "url": "https://raw.githubusercontent.com/VSWijaya/FIT3179-HW9/refs/heads/main/jobs.csv"
+      },
+      "key": "state",
+      "fields": ["job_vacancies"]
+    }
+  }],
+  "projection": {"type": "mercator"},
+  "mark": {
+    "type": "geoshape",
+    "stroke": "white",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "color": {
+      "field": "job_vacancies",
+      "type": "quantitative",
+      "scale": {"scheme": "blues"},
+      "title": "Job Vacancies"
+    },
+    "tooltip": [
+      {"field": "properties.STATE_NAME", "title": "State", "type": "nominal"},
+      {"field": "job_vacancies", "title": "Job Vacancies", "type": "quantitative", "format": ","}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "background": "transparent"
+  }
+}
